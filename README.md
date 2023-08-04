@@ -10,5 +10,5 @@ The second is a fully functional ecommerce site populated with inventory from th
 This website uses React and Redux along with Firebase authentication.
 You are able to browse the selection of items, register an account, login using the newly created account and add or remove items from your cart.
 
-https://64cb039f40a3891d86b3217e--bright-puppy-ef2ab4.netlify.app/
+https://64cc57d2f1f1823b36e8a8f5--bucolic-dodol-9a35d8.netlify.app
 

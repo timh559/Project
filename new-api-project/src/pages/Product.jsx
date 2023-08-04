@@ -1,8 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from "react-bootstrap";
-import { addToCart } from "../components/CartSlice";
-import { increaseQuantity, decreaseQuantity } from "../components/CartSlice";
+import { increaseQuantity, decreaseQuantity, addToCart } from "../components/CartSlice";
 
 
 export default function Product({ product }) {

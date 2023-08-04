@@ -1,44 +1,76 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Card, Carousel } from "react-bootstrap";
+import { Card, Carousel, Container, Button } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Home() {
   const products = useSelector((state) => state.products.products);
+  const currentUser = useAuth();
+  const isLoggedIn = currentUser.currentUser !== null;
+  const { logout } = useAuth();
 
+  async function handleLogout() {
+    try {
+      await logout();
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <>
       <div
         style={{
           textAlign: "center",
           color: "white",
-          margin: "5% auto",
         }}
       >
-        <h1>Featured Products</h1>
+        {isLoggedIn && (
+          <Container>
+            <p>Logged in as: {currentUser.currentUser.email}
+            <Button
+              className="p-2 mx-auto"
+              variant="link"
+              size="sm"
+              onClick={handleLogout}
+            >
+              Log Out
+            </Button>
+            </p>
+          </Container>
+        )}
       </div>
       <div
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.9)",
           borderRadius: "10px",
-          padding: "3rem",
+          padding: "5%",
           margin: "5% auto",
-          width: "80vw",
+          height: "100%",
+          width: "80%",
+          maxHeight: "80vh",
           maxWidth: "700px",
+          textAlign: "center",
+          color: "white",
         }}
       >
-        <Carousel>
-          {products.map((product, index) => (
-            <Carousel.Item key={index}>
+        <h3>Featured Products</h3>
+        <Carousel
+        >
+          {products.map((product) => (
+            <Carousel.Item key={product.id}>
               <Card
                 style={{
                   padding: "1rem",
+                  margin: "0 auto",
+                  width: "100%",
+                  height: "100%",
                 }}
               >
                 <Card.Img
                   variant="top"
                   src={product.image}
                   style={{
-                    height: "300px",
+                    height: "200px",
                     objectFit: "contain",
                   }}
                 />

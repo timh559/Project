@@ -1,7 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Alert, Button, Card, Col, Form, Row } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function RegistrationForm() {
@@ -33,7 +32,10 @@ export default function RegistrationForm() {
   }
 
   return (
-    <Card bg="dark" data-bs-theme="dark" className="mt-5 px-3 py-3 w-100">
+    <Card bg="dark" data-bs-theme="dark" className="mt-5 px-3 py-3 w-100"
+      style={{
+        maxWidth: "500px",
+      }}>
       <Card.Body>
         <Card.Title className="text-center">Register</Card.Title>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -43,6 +45,7 @@ export default function RegistrationForm() {
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
+                size="sm"
                 placeholder="Enter First Name"
                 ref={firstNameRef}
                 required
@@ -52,6 +55,7 @@ export default function RegistrationForm() {
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
+                size="sm"
                 placeholder="Enter Last Name"
                 ref={lastNameRef}
                 required
@@ -62,6 +66,7 @@ export default function RegistrationForm() {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
+              size="sm"
               placeholder="Enter email"
               ref={emailRef}
               required
@@ -71,6 +76,7 @@ export default function RegistrationForm() {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
+              size="sm"
               placeholder="Enter password"
               ref={passwordRef}
               required
@@ -80,6 +86,7 @@ export default function RegistrationForm() {
             <Form.Label>Password Confirmation</Form.Label>
             <Form.Control
               type="password"
+              size="sm"
               placeholder="Enter password confirmation"
               ref={passwordConfirmationRef}
               required

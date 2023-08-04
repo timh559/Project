@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+
 const AuthContext = React.createContext();
 
 export const useAuth = () => {
@@ -11,24 +12,34 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
+  async function signup(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log(user);
+        return user;
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
+        console.log(errorCode);
+        throw new Error(error);
       });
   }
-  function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
+  async function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log(user);
+        return user;
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
+        console.log(errorCode);
+        throw new Error(error);
       });
   }
   function logout() {
@@ -43,12 +54,14 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = {
+  const value = useMemo(() => {
+    return {
     currentUser,
     signup,
     login,
     logout
-  };
+    };
+  }, [currentUser]);
 
   return (
   <AuthContext.Provider value={value}>

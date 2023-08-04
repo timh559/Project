@@ -1,7 +1,7 @@
-import React from 'react'
-import RegistrationForm from '../components/RegistrationForm'
-import { Container, Button } from 'react-bootstrap'
-import { useAuth } from '../contexts/AuthContext'
+import React from "react";
+import { Container, Button } from "react-bootstrap";
+import LoginForm from "../components/LoginForm";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Register() {
   const currentUser = useAuth();
@@ -15,9 +15,10 @@ export default function Register() {
       console.log(e);
     }
   }
+
   return (
     <>
-    <div
+      <div
         style={{
           textAlign: "center",
           color: "white",
@@ -40,18 +41,15 @@ export default function Register() {
           </Container>
         )}
       </div>
-    <Container className='d-flex align-items-center justify-content-center'>
-        {isLoggedIn ? 
-        <div style={{
-          textAlign: "center",
-        }}>
-          <h3>You are already logged in!</h3>
-          <h6>Log out to register a new account.</h6>
+      <Container className="d-flex align-items-center justify-content-center">
+      {isLoggedIn ? 
+        <div>
+          <h1>You are logged in!</h1>
         </div>
         :
-        <RegistrationForm />
+        <LoginForm />
         }
-    </Container>
+      </Container>
     </>
-  )
+  );
 }
